@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Which flights can our aircraft do? — NZ 6–13-seat class tracker</title>
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--ink:#1c2733;--muted:#67788a;--line:#e3e8ee;
+--s1:#3465d6;--s2:#e07b26;--good:#177a3d;--goodbg:#e7f5ec;--crit:#c0392b;--critbg:#faecea}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.45 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 18px 40px}
+h1{font-size:23px;margin:0 0 2px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.hero{border-left:4px solid var(--good)}
+.hero .v{font-size:38px;font-weight:750;letter-spacing:-.5px}
+.hero .v small{font-size:15px;font-weight:500;color:var(--muted)}
+.k{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.n{font-size:12.5px;color:var(--muted);margin-top:3px;max-width:34em}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 10px}
+.tab{border:1px solid var(--line);background:var(--surface);border-radius:99px;
+padding:7px 16px;font-size:14px;cursor:pointer;color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ctl{display:flex;gap:20px;align-items:center;flex-wrap:wrap;font-size:14px;margin:8px 0 14px}
+.ctl b{font-weight:600}
+input[type=range]{width:180px;vertical-align:middle}
+select{font:inherit;padding:3px 6px;border:1px solid var(--line);border-radius:6px}
+#map{width:100%;height:auto;display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:8px}
+.legend .it{display:flex;align-items:center;gap:6px}
+.sw{width:20px;height:0;border-top:3px solid}
+.sw.dash{border-top-style:dashed}
+.dot{width:9px;height:9px;border-radius:50%}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;
+text-align:left;padding:6px 8px;border-bottom:2px solid var(--line)}
+td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.pill{font-size:12px;border-radius:99px;padding:2px 9px;white-space:nowrap}
+.ok{background:var(--goodbg);color:var(--good)}
+.no{background:var(--critbg);color:var(--crit)}
+.inc{background:#eef1f4;color:var(--muted)}
+.banner{background:#fff7e6;border:1px solid #f2d9a4;border-radius:10px;
+padding:10px 14px;font-size:14px;margin:0 0 14px}
+.foot{color:var(--muted);font-size:12.5px;margin-top:26px}
+a{color:var(--s1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Which flights can our aircraft do?</h1>
+  <p class="sub">Every flight flown in New Zealand by aircraft in our size class (6–13 seats) —
+  green when our 900&nbsp;km hydrogen aircraft could have flown it. Data © <a href="https://adsb.lol">adsb.lol</a> contributors (ODbL).</p>
+
+  <div id="banner" class="banner" style="display:none"></div>
+
+  <div class="row">
+    <div class="card hero" style="flex:1;min-width:260px">
+      <div class="k" id="heroK">Flights our aircraft could have flown</div>
+      <div class="v" id="heroV">—</div>
+      <div class="n" id="heroN"></div>
+    </div>
+    <div class="card" style="flex:1;min-width:220px">
+      <div class="k">Window</div>
+      <div class="tabs" style="margin:6px 0 4px">
+        <button class="tab" data-w="live">Live</button>
+        <button class="tab on" data-w="day">Today</button>
+        <button class="tab" data-w="week">Week</button>
+        <button class="tab" data-w="month">Month</button>
+        <button class="tab" data-w="all">All-time</button>
+      </div>
+      <div class="n" id="winN"></div>
+    </div>
+  </div>
+
+  <div class="ctl card" style="margin-top:14px">
+    <span><b>Aircraft range</b> <input type="range" id="rng" min="200" max="1500" step="25" value="900">
+      <span id="rngV">900 km</span></span>
+    <label><b>Return without refuelling</b> <input type="checkbox" id="rt"></label>
+    <span><b>Min runway</b>
+      <select id="rwy"><option value="0">any</option><option value="600">600 m</option>
+      <option value="800" selected>800 m</option><option value="1000">1000 m</option></select></span>
+  </div>
+
+  <div class="card">
+    <svg id="map" viewBox="0 0 745 710" role="img" aria-label="Map of New Zealand flights"></svg>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div class="k" id="tblK">Flights</div>
+    <table><thead><tr><th>Date</th><th>Rego</th><th>Aircraft</th><th>Seats</th>
+      <th>From → To</th><th style="text-align:right">km</th><th>Our aircraft?</th></tr></thead>
+      <tbody id="tb"></tbody></table>
+    <div class="n" id="tblN"></div>
+  </div>
+
+  <div class="foot">Positions & coverage: community ADS-B (adsb.lol, ODbL — this open repository republishes
+  the derived flight database, satisfying share-alike). Aircraft class from the NZ CAA register.
+  Aerodromes/runways: OurAirports. Sampling every ~5 min: very short hops (&lt;10 min) can be missed and
+  leg counts are lower bounds. Coverage is thin at low level in Fiordland / Stewart Island / West Coast —
+  flights there are under-counted. A flight with an unsnapped start or end (receiver gap) is shown dashed
+  and excluded from the headline %.</div>
+</div>
+
+<script>
+const S={w:'day',range:900,rt:false,minRwy:800};
+let FL=[],AERO={},OUT=null,LATEST=null,WATCH={};
+
+function csv(text){ // minimal quoted-CSV parser
+  const rows=[];let row=[],cur='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++}else q=false } else cur+=c }
+    else if(c==='"')q=true;
+    else if(c===','){row.push(cur);cur=''}
+    else if(c==='\n'){row.push(cur);rows.push(row);row=[];cur=''}
+    else if(c!=='\r')cur+=c}
+  if(cur||row.length){row.push(cur);rows.push(row)}
+  const h=rows.shift();
+  return rows.filter(r=>r.length>1).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]])));
+}
+
+/* projection fitted to outline bbox */
+let PR=null;
+const NL=lon=>lon<0?lon+360:lon;   // Chathams sit across the antimeridian
+function fitProj(){
+  let mnx=1e9,mxx=-1e9,mny=1e9,mxy=-1e9;
+  const scan=c=>{for(const p of c){const x=NL(p[0]);mnx=Math.min(mnx,x);mxx=Math.max(mxx,x);
+    mny=Math.min(mny,p[1]);mxy=Math.max(mxy,p[1])}};
+  for(const poly of OUT)for(const ring of poly)scan(ring);
+  const cy=(mny+mxy)/2,kx=Math.cos(cy*Math.PI/180);
+  const w=(mxx-mnx)*kx,h=mxy-mny,s=Math.min(705/w,670/h);
+  PR=(lon,lat)=>[20+(NL(lon)-mnx)*kx*s,20+(mxy-lat)*s];
+}
+const P=(lon,lat)=>PR(lon,lat);
+
+function el(t,a,parent){const e=document.createElementNS('http://www.w3.org/2000/svg',t);
+  for(const k in a)e.setAttribute(k,a[k]);if(parent)parent.appendChild(e);return e}
+
+function verdict(f){
+  if(!f.complete)return{v:'inc',why:'incomplete trace (receiver gap)'};
+  const lim=S.rt?S.range/2:S.range;
+  if(f.km>lim)return{v:'no',why:`${f.km} km > ${Math.round(lim)} km usable`};
+  const ro=AERO[f.orig]?.rwy,rd=AERO[f.dest]?.rwy;
+  if(S.minRwy&&ro&&ro<S.minRwy)return{v:'no',why:`runway ${f.orig} ${ro} m < ${S.minRwy} m`};
+  if(S.minRwy&&rd&&rd<S.minRwy)return{v:'no',why:`runway ${f.dest} ${rd} m < ${S.minRwy} m`};
+  return{v:'ok',why:(!ro||!rd)?'feasible (a runway length unverified)':'feasible'};
+}
+
+const dstr=d=>d.toISOString().slice(0,10);
+function nzToday(){const n=new Date(Date.now()+12*3600e3);return dstr(n)}
+function windowFlights(){
+  if(S.w==='all')return FL;
+  const t=nzToday();
+  if(S.w==='day')return FL.filter(f=>f.date===t);
+  const days=S.w==='week'?7:30,keep=new Set();
+  for(let i=0;i<days;i++)keep.add(dstr(new Date(Date.now()+12*3600e3-i*86400e3)));
+  return FL.filter(f=>keep.has(f.date));
+}
+
+function draw(){
+  const svg=document.getElementById('map');svg.innerHTML='';
+  const g=el('g',{},svg);
+  for(const poly of OUT)for(const ring of poly){
+    let d='';ring.forEach((p,i)=>{const[x,y]=P(p[0],p[1]);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)});
+    el('path',{d:d+'Z',fill:'#eceff3',stroke:'#cfd6de','stroke-width':1},g);
+  }
+  for(const k in AERO){const a=AERO[k];const[x,y]=P(a.lon,a.lat);
+    el('circle',{cx:x,cy:y,r:1.6,fill:'#b6c0cb'},g)}
+  const L=document.getElementById('legend');
+  if(S.w==='live'){
+    const acs=LATEST?.ac||[];
+    for(const a of acs){const[x,y]=P(a.lon,a.lat);
+      el('circle',{cx:x,cy:y,r:8,fill:'none',stroke:'var(--s2)','stroke-width':1.2,opacity:.5},g);
+      const c=el('circle',{cx:x,cy:y,r:3.6,fill:'var(--s2)'},g);
+      el('title',{},c).textContent=`${a.rego||a.hex} ${a.ac} ${a.fl||''} ${a.alt} ft`;}
+    L.innerHTML=`<div class="it"><span class="dot" style="background:var(--s2)"></span>in-class aircraft airborne (${acs.length})</div>`;
+    return;
+  }
+  let drawn=0;
+  for(const f of windowFlights()){
+    const v=verdict(f);
+    if(!f.complete){
+      let d='';(f.pts||[]).forEach((p,i)=>{const[x,y]=P(p[1],p[0]);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)});
+      if(d)el('path',{d,fill:'none',stroke:'#9aa7b4','stroke-width':1,'stroke-dasharray':'3 3',opacity:.6},g);
+      continue;
+    }
+    const o=AERO[f.orig],t=AERO[f.dest];if(!o||!t)continue;
+    const[x1,y1]=P(o.lon,o.lat),[x2,y2]=P(t.lon,t.lat);
+    const mx=(x1+x2)/2+(y1-y2)*.15,my=(y1+y2)/2+(x2-x1)*.15;
+    const p=el('path',{d:`M${x1} ${y1}Q${mx} ${my} ${x2} ${y2}`,fill:'none',
+      stroke:v.v==='ok'?'var(--good)':'var(--crit)','stroke-width':v.v==='ok'?1.8:1.4,
+      opacity:v.v==='ok'?.75:.6},g);
+    el('title',{},p).textContent=`${f.rego} ${f.ac} · ${f.orig}→${f.dest} ${f.km} km · ${v.why}`;
+    drawn++;
+  }
+  L.innerHTML=`<div class="it"><span class="sw" style="border-color:var(--good)"></span>our aircraft could fly it</div>
+  <div class="it"><span class="sw" style="border-color:var(--crit)"></span>outside current settings</div>
+  <div class="it"><span class="sw dash" style="border-color:#9aa7b4"></span>incomplete trace (excluded from %)</div>`;
+}
+
+function refresh(){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.w===S.w));
+  document.getElementById('rngV').textContent=S.range+' km';
+  const W=windowFlights(),comp=W.filter(f=>f.complete);
+  const ok=comp.filter(f=>verdict(f).v==='ok').length;
+  const names={live:'right now',day:'today',week:'past 7 days',month:'past 30 days',all:'since collection began'};
+  if(S.w==='live'){
+    const n=LATEST?.ac?.length??0,t=LATEST?new Date(LATEST.t*1000):null;
+    document.getElementById('heroK').textContent='In-class aircraft airborne right now';
+    document.getElementById('heroV').innerHTML=n+' <small>aircraft</small>';
+    document.getElementById('heroN').textContent=(t?'as of '+t.toLocaleTimeString('en-NZ',{timeZone:'Pacific/Auckland',hour:'2-digit',minute:'2-digit'})+' NZT · ':'')+
+      'a single instant is always a small number — flip to Today/Week/Month for volume';
+  }else{
+    document.getElementById('heroK').textContent='Flights our aircraft could have flown — '+names[S.w];
+    document.getElementById('heroV').innerHTML=comp.length?Math.round(ok/comp.length*100)+'% <small>'+ok+' of '+comp.length+' flights</small>':'—';
+    document.getElementById('heroN').textContent=comp.length?
+      `${W.length-comp.length} incomplete traces shown dashed, excluded from % · settings: ${S.range} km${S.rt?', return trip':''}${S.minRwy?', ≥'+S.minRwy+' m runway':''}`:
+      'no complete flights in this window yet';
+  }
+  document.getElementById('winN').textContent=FL.length?`archive: ${FL.length} flights since ${FL[0].date} — grows every night, nothing deleted`:'';
+  const tb=document.getElementById('tb');tb.innerHTML='';
+  const rows=(S.w==='live'?[]:W).slice().reverse().slice(0,200);
+  for(const f of rows){
+    const v=verdict(f);
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${f.date}</td><td>${f.rego||f.hex}</td><td>${f.ac}</td><td>${f.seats}</td>
+      <td>${f.complete?f.orig+' → '+f.dest:'<i>partial trace</i>'}</td>
+      <td style="text-align:right">${f.km||''}</td>
+      <td><span class="pill ${v.v}">${v.v==='ok'?'✓ yes':v.v==='no'?'✗ '+v.why:'— excluded'}</span></td>`;
+    tb.appendChild(tr);
+  }
+  document.getElementById('tblN').textContent=rows.length===200?'showing latest 200':'';
+  draw();
+}
+
+async function liveRefresh(){
+  try{ // try the network live (CORS ok on api.adsb.lol); fall back to last sweep file
+    const acs={};
+    for(const c of [[-38.0,175.5,250],[-44.5,169.8,250]]){
+      const r=await fetch(`https://api.adsb.lol/v2/point/${c[0]}/${c[1]}/${c[2]}`);
+      for(const a of (await r.json()).ac||[]){
+        const h=(a.hex||'').toLowerCase().replace('~','');
+        if(WATCH[h]&&a.alt_baro!=='ground'&&a.lat!=null&&!acs[h])
+          acs[h]={hex:h,lat:a.lat,lon:a.lon,alt:a.alt_baro,fl:(a.flight||'').trim(),
+                  rego:WATCH[h].rego,ac:WATCH[h].aircraft,seats:WATCH[h].seats};
+      }
+    }
+    LATEST={t:Date.now()/1000,ac:Object.values(acs)};
+  }catch(e){/* keep latest.json fallback */}
+  refresh();
+}
+
+async function init(){
+  const [ou,ae,wl]=await Promise.all([
+    fetch('data/nz_outline.json').then(r=>r.json()),
+    fetch('data/aerodromes.csv').then(r=>r.text()),
+    fetch('data/watchlist.csv').then(r=>r.text())]);
+  OUT=ou.coordinates;fitProj();
+  for(const r of csv(ae))AERO[r.icao]={lat:+r.lat,lon:+r.lon,name:r.name,
+    rwy:r.runway_len_m?+r.runway_len_m:null};
+  for(const r of csv(wl))WATCH[r.hex]=r;
+  try{FL=await fetch('data/flights.json?'+Date.now()).then(r=>r.json())}catch(e){FL=[]}
+  try{LATEST=await fetch('data/latest.json?'+Date.now()).then(r=>r.json())}catch(e){LATEST=null}
+  FL.sort((a,b)=>a.t0-b.t0);
+  if(!FL.length){const b=document.getElementById('banner');b.style.display='block';
+    b.textContent='Collecting — the archive starts with the first night\'s segmentation run. The Live tab already works; Today fills in tomorrow, Week after a week, and it only ever grows from there.'}
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.w=b.dataset.w;
+    if(S.w==='live')liveRefresh();else refresh()});
+  document.getElementById('rng').oninput=e=>{S.range=+e.target.value;refresh()};
+  document.getElementById('rt').onchange=e=>{S.rt=e.target.checked;refresh()};
+  document.getElementById('rwy').onchange=e=>{S.minRwy=+e.target.value;refresh()};
+  refresh();
+}
+init();
+</script>
+</body>
+</html>

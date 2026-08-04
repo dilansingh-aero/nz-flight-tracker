@@ -1,0 +1,208 @@
+ident,icao,iata,name,type,municipality,lat,lon,elev_ft,runway_len_ft,runway_len_m,surface,lighted,n_runways,scheduled_service
+NZAA,NZAA,AKL,Auckland International Airport,large_airport,Auckland,-37.01199,174.78633,23,11926,3635,Concrete,1,1,1
+NZCH,NZCH,CHC,Christchurch International Airport,large_airport,Christchurch,-43.48903,172.53206,123,10787,3288,Asphalt,1,3,1
+NZOH,NZOH,OHA,RNZAF Base Ohakea,medium_airport,,-40.206,175.388,164,8028,2447,Asphalt,1,3,0
+NZNV,NZNV,IVC,Invercargill Airport,medium_airport,Invercargill,-46.4124,168.313,5,7251,2210,Asphalt,1,4,1
+NZHN,NZHN,HLZ,Hamilton International Airport,medium_airport,Hamilton,-37.86696,175.33195,172,6755,2059,Asphalt,1,5,1
+NZWP,NZWP,,RNZAF Base Auckland-Whenuapai,medium_airport,,-36.7878,174.63001,103,6665,2031,Asphalt,1,3,0
+NZWN,NZWN,WLG,Wellington International Airport,large_airport,Wellington,-41.32684,174.80686,41,6352,1936,Asphalt,1,1,1
+NZPM,NZPM,PMR,Palmerston North Airport,medium_airport,Palmerston North,-40.3206,175.617,151,6240,1902,Unknown,0,3,1
+NZDN,NZDN,DUD,Dunedin International Airport,medium_airport,Dunedin,-45.92902,170.19776,4,6234,1900,Asphalt,1,1,1
+NZQN,NZQN,ZQN,Queenstown Airport,large_airport,Queenstown,-45.0192,168.74638,1171,6204,1891,Asphalt,1,2,1
+NZTG,NZTG,TRG,Tauranga Airport,medium_airport,Tauranga,-37.6719,176.196,13,5988,1825,Asphalt,0,5,1
+NZNR,NZNR,NPE,Hawke's Bay Airport,medium_airport,Napier,-39.4658,176.86999,6,5741,1750,Asphalt,1,2,1
+NZRO,NZRO,ROT,Rotorua Regional Airport,medium_airport,Rotorua,-38.1092,176.317,935,5321,1622,Asphalt,1,3,1
+NZMC,NZMC,MON,Mount Cook Airport,medium_airport,,-43.765,170.133,2153,5157,1572,Asphalt,0,1,0
+NZ-0022,NZCW,,Cromwell/Louburn Airport,small_airport,Cromwell,-44.98276,169.2157,1010,5080,1548,Grass,0,1,0
+NZRK,NZRK,,Rangitaiki Airfield,small_airport,,-38.8864,176.364,2323,4934,1504,Grass,0,1,0
+NZWT,NZWT,WTZ,Whitianga Airport,small_airport,Whitianga,-36.82873,175.6828,10,4744,1446,Grass,0,2,0
+NZWB,NZWB,BHE,Woodbourne Airport,medium_airport,Blenheim,-41.5183,173.87,109,4675,1425,Grass,0,3,1
+NZAR,NZAR,AMZ,Ardmore Airport,medium_airport,Manurewa,-37.0297,174.97301,111,4630,1411,Asphalt,1,3,0
+NZKT,NZKT,KAT,Kaitaia Airport,medium_airport,Awanui,-35.06984,173.28705,270,4600,1402,Asphalt,1,2,1
+NZAS,NZAS,ASG,Ashburton Airport,small_airport,Ashburton,-43.9033,171.797,302,4554,1388,Grass,0,4,0
+NZAP,NZAP,TUO,Taupo Airport,medium_airport,Taupo,-38.7397,176.084,1335,4547,1386,Asphalt,1,2,1
+NZWU,NZWU,WAG,Wanganui Airport,medium_airport,Wanganui,-39.96347,175.02444,27,4521,1378,Asphalt,1,6,1
+NZCI,NZCI,CHT,Inia William Tuuta Memorial Airport,medium_airport,Te One,-43.81189,-176.46514,43,4462,1360,Asphalt,1,1,1
+NZPP,NZPP,PPQ,Paraparaumu Airport,medium_airport,,-40.9047,174.989,22,4429,1350,Asphalt,1,5,0
+NZNS,NZNS,NSN,Nelson Airport,medium_airport,Nelson,-41.29671,173.22432,17,4420,1347,Asphalt,1,4,1
+NZHK,NZHK,HKK,Hokitika Airfield,medium_airport,,-42.7136,170.985,146,4311,1314,Asphalt,1,2,1
+NZGS,NZGS,GIS,Gisborne Airport,medium_airport,Gisborne,-38.6633,177.978,15,4298,1310,Asphalt,1,5,1
+NZNP,NZNP,NPL,New Plymouth Airport,medium_airport,New Plymouth,-39.0086,174.179,97,4298,1310,Asphalt,1,3,1
+NZOU,NZOU,OAM,Oamaru Airport,medium_airport,,-44.97,171.082,99,4210,1283,Asphalt,1,3,0
+NZTU,NZTU,TIU,Timaru Airport,medium_airport,,-44.3028,171.22501,89,4200,1280,Asphalt,1,3,1
+NZWK,NZWK,WHK,Whakatāne Airport,medium_airport,Whakatāne,-37.92222,176.91696,20,4200,1280,Asphalt,1,3,1
+NZWS,NZWS,WSZ,Westport Airport,medium_airport,Westport,-41.73711,171.57903,13,4200,1280,Asphalt,1,1,1
+NZMS,NZMS,MRO,Hood Airport,medium_airport,Masterton,-40.97463,175.63454,364,4101,1250,Asphalt,1,5,0
+NZGA,NZGA,,Galatea Airfield,small_airport,,-38.4039,176.744,594,3953,1205,Grass,0,1,0
+NZDV,NZDV,,Dannevirke Aerodrome,small_airport,,-40.23168,176.0794,635,3937,1200,Grass,0,2,0
+NZLX,NZLX,ALR,Alexandra Aerodrome,medium_airport,Alexandra,-45.2105,169.37111,752,3937,1200,Grass,0,3,0
+NZWF,NZWF,WKA,Wanaka Airport,medium_airport,Wanaka,-44.72209,169.24629,1142,3937,1200,Asphalt,0,1,1
+NZRU,NZRU,,Waiouru Airport,small_airport,,-39.4464,175.658,2686,3917,1194,Asphalt,0,1,0
+NZKK,NZKK,KKE,Kerikeri Airport,medium_airport,Kerikeri,-35.25915,173.91332,492,3904,1190,Asphalt,1,4,1
+NZRT,NZRT,,Rangiora Airfield,small_airport,Rangiora,-43.29,172.54201,180,3871,1180,Grass,0,3,0
+NZWR,NZWR,WRE,Whangarei Airport,medium_airport,Whangarei,-35.76925,174.36371,133,3599,1097,Asphalt,1,2,1
+NZGM,NZGM,GMN,Greymouth Airport,small_airport,,-42.4617,171.19,10,3579,1091,Concrete,1,1,0
+NZMA,NZMA,MTA,Matamata Glider Airport,small_airport,,-37.7344,175.742,180,3572,1089,Grass,0,1,0
+NZUK,NZUK,TWZ,Pukaki Airport,medium_airport,Twitzel,-44.235,170.118,1575,3550,1082,Asphalt,0,1,0
+NZMO,NZMO,TEU,Manapouri Airport,medium_airport,,-45.5331,167.64999,687,3547,1081,Asphalt,0,1,0
+NZHS,NZHS,,Hastings Aerodrome,small_airport,Bridge Pa,-39.6467,176.767,72,3525,1074,B,1,4,0
+NZYP,NZYP,,Waipukurau Airport,small_airport,,-39.9967,176.537,430,3461,1055,Gr,0,1,0
+NZRI,NZRI,,Rangitata Island Airport,small_airport,Rangitata Island,-44.085,171.416,288,3412,1040,Grass,0,2,0
+NZFI,NZFI,,Feilding Airport,small_airport,Feilding,-40.2558,175.605,214,3376,1029,Asphalt,1,1,0
+NZDA,NZDA,DGR,Dargaville Aerodrome,small_airport,Dargaville,-35.9393,173.89286,6,3281,1000,Limestone,0,2,0
+NZDY,NZDY,,Drury Airfield,small_airport,,-37.09639,174.97528,100,3281,1000,Grass,0,1,0
+NZFF,NZFF,,Forest Field Aerodrome,small_airport,,-43.3858,172.36099,381,3281,1000,Grass,0,3,0
+NZWL,NZWL,,West Melton Aerodrome,small_airport,,-43.47727,172.3932,312,3271,997,Grass,0,4,0
+NZTE,NZTE,,Te Kowhai Airfield,small_airport,Te Kowhai,-37.7442,175.161,49,3224,983,Grass,0,1,0
+NZGT,NZGT,GTN,Glentanner Airport,medium_airport,Glentanner Station,-43.9067,170.12801,1824,3166,965,Asphalt,0,1,0
+NZHA,NZHA,,Hawera Airport,small_airport,Hawera,-39.5533,174.267,371,3166,965,Unknown,0,1,0
+NZTL,NZTL,,Tekapo Aerodrome,small_airport,,-44.0053,170.444,2496,3116,950,Paved,0,1,0
+NZGB,NZGB,GBZ,Great Barrier Aerodrome,small_airport,Claris,-36.2414,175.472,20,3051,930,Sealed,0,1,1
+NZWO,NZWO,WIR,Wairoa Airport,medium_airport,Wairoa,-39.01186,177.4044,42,3000,914,Asphalt,1,1,0
+NZSL,NZSL,,Springhill Airport,small_airport,,-36.3236,174.556,102,2854,870,Unknown,0,1,0
+NZTT,NZTT,,Te Kuiti Aerodrome,small_airport,Te Kuiti,-38.30351,175.14781,161,2841,866,Unknown,0,1,0
+NZTO,NZTO,TKZ,Tokoroa Airfield,small_airport,Tokoroa,-38.2367,175.892,1220,2789,850,Unknown,0,1,0
+NZUN,NZUN,,Pauanui Aerodrome,small_airport,Pauanui,-37.02107,175.86363,20,2782,848,Grass,0,1,0
+NZPN,NZPN,PCN,Picton Aerodrome,small_airport,Koromiko,-41.3461,173.95599,161,2755,840,Unknown,0,1,1
+NZKF,NZKF,,Kaipara Flats Airport,small_airport,,-36.4064,174.58701,112,2753,839,Grass,0,1,0
+NZNE,NZNE,,North Shore Aerodrome,small_airport,Dairy Flat,-36.6567,174.655,210,2660,811,Concrete,1,2,0
+NZOX,NZOX,,Okiwi Station Airport,small_airport,,-36.1464,175.41901,10,2644,806,Sealed,0,1,0
+NZFJ,NZFJ,WHO,Franz Josef Aerodrome,small_airport,,-43.3631,170.134,240,2628,801,Asphalt,0,1,0
+NZRC,NZRC,SZS,Ryan's Creek Aerodrome,small_airport,Oban,-46.8997,168.101,62,2625,800,Asphalt,1,1,0
+NZMF,NZMF,MFN,Milford Sound Airport,small_airport,,-44.6733,167.923,10,2598,792,Asphalt,0,1,0
+NZMK,NZMK,MZP,Motueka Airport,small_airport,,-41.1233,172.989,39,2562,781,Asphalt,0,2,0
+NZWQ,NZWQ,,Waitiki Aerodrome,small_airport,Te Kao,-34.52717,172.83818,190,2549,777,Grass,0,1,0
+NZPI,NZPI,,Parakai Aerodrome,small_airport,,-36.6519,174.436,49,2493,760,Asphalt,0,1,0
+NZMT,NZMT,,Martinborough Airport,small_airport,Martinborough,-41.2142,175.48599,,2457,749,Gravel,0,1,0
+NZKY,NZKY,,Kowhai Aerodrome,small_airport,Kowhai,-39.8461,176.423,840,2418,737,Gr,0,1,0
+NZ-0005,NZHP,,Lake Haupiri/Gloriavale Christian Community Airport,small_airport,,-42.6012,171.69901,600,2305,703,Sealed,0,1,0
+NZHT,NZHT,,Haast Aerodrome,small_airport,Haast,-43.8653,169.041,13,2297,700,Gravel,0,1,0
+NZKC,NZKC,,Kelly Field,small_airport,,-37.2561,175.07201,52,2297,700,Grass,0,1,0
+NZKI,NZKI,KBZ,Kaikoura Airport,small_airport,,-42.425,173.605,20,2297,700,Asphalt,0,2,0
+NZCB,NZCB,,Centre Bush Aerodrome,small_airport,Centre Bush,-46.04,168.312,255,2251,686,Grass,0,1,0
+NZGY,NZGY,,Glenorchy Airport,small_airport,,-44.8717,168.39799,1260,2215,675,Grass,0,1,0
+NZBA,NZBA,,Balclutha Aerodrome,small_airport,Balclutha,-46.24566,169.74888,22,2185,666,Grass,0,1,0
+NZKE,NZKE,WIK,Waiheke Island Aerodrome,small_airport,Waiheke Island,-36.8089,175.086,445,2066,630,Grass,0,1,0
+NZCX,NZCX,CMV,Coromandel Airport,small_airport,Coromandel,-36.7917,175.509,10,2044,623,Grass,1,1,0
+NZMW,NZMW,,Makarora Airstrip,small_airport,,-44.2317,169.23,1142,1969,600,Grass,0,1,0
+NZWV,NZWV,,Waihi Beach Airport,small_airport,Island View,-37.43044,175.95239,4,1916,584,Grass,0,1,0
+NZKD,NZKD,,Motu Kaikoura Island Aerodrome,small_airport,Kaikoura Island,-36.1781,175.32401,400,1796,547,Grass,0,1,0
+NZFT,NZFT,,Flat Point Aerodrome,small_airport,Flat Point,-41.24339,175.96023,46,1640,500,Grass,0,1,0
+NZMJ,NZMJ,,Martins Bay Aerodrome,small_airport,Jamestown,-44.36597,168.01626,348,1312,400,Grass,0,1,0
+NZ-0001,NZ-0001,,Mesopotamia Station Airstrip,small_airport,,-43.64117,170.90237,,,,Unknown,0,0,0
+NZ-0002,NZ-0002,,Arrowsmith Station,small_airport,,-43.46634,171.16235,,,,Unknown,0,0,0
+NZ-0003,NZ-0003,,Hawea Downs,small_airport,,-44.6609,169.23966,,,,Unknown,0,0,0
+NZ-0004,NZ-0004,,Hakatere Airstrip,small_airport,,-43.57744,171.17091,2000,,,Unknown,0,0,0
+NZ-0007,NZ-0007,,Dunsandel,small_airport,,-43.68369,172.149,,,,Unknown,0,0,0
+NZ-0008,NZ-0008,,Cattle Creek Airstrip,small_airport,,-44.5115,170.67,,,,Unknown,0,0,0
+NZ-0009,NZ-0009,,Manuka Point Lodge Airstrip,small_airport,,-43.27456,171.21756,1800,,,Unknown,0,0,0
+NZ-0010,NZ-0010,,Dingleburn Station Airstrip,small_airport,,-44.4381,169.39101,1000,,,Unknown,0,0,0
+NZ-0011,NZ-0011,,Worthy Lodge airstrip (Ladbrooks),small_airport,,-43.63935,172.52541,20,,,Unknown,0,0,0
+NZ-0012,NZ-0012,,Kings (Ladbrooks),small_airport,,-43.63926,172.53067,20,,,Unknown,0,0,0
+NZ-0013,NZ-0013,,Culverden,small_airport,Hurunui District Council,-42.76765,172.89197,597,,,Unknown,0,0,0
+NZ-0014,NZ-0014,,Big Bay Beach Airstrip,small_airport,Big Bay,-44.29498,168.11494,1,,,Unknown,0,0,0
+NZ-0015,NZ-0015,,Taitapu Ag strip,small_airport,Taitapu,-43.6706,172.59,,,,Unknown,0,0,0
+NZ-0016,NZ-0016,,Cape Campbell airstrip,small_airport,,-41.7459,174.272,,,,Unknown,0,0,0
+NZ-0017,NZ-0017,,Neils Beach Aerodrome,small_airport,Neils Beach,-43.99752,168.66166,,,,Unknown,0,0,0
+NZ-0018,NZ-0018,,Gorge River Airstrip,small_airport,Haast,-44.18457,168.19244,,,,Unknown,0,0,0
+NZ-0020,NZ-0020,,Center Island Airstrip,small_airport,Raratoka Island,-46.4549,167.8495,30,,,Unknown,0,0,0
+NZ-0021,NZ-0021,,Glenshe Airstrip,small_airport,,-45.0419,170.2403,1637,,,Unknown,0,0,0
+NZ-0026,NZPT,,Pitt Island Aerodrome,small_airport,Pitt Island,-44.29317,-176.20348,,,,Unknown,0,0,1
+NZ-0027,NZ-0027,,Raoul Island Airstrip,small_airport,Kermadec Islands,-29.24388,-177.93654,,,,Unknown,0,0,0
+NZ-0029,NZFO,,Fox Glacier Aerodrome,small_airport,Fox Glacier,-43.46111,170.01702,,,,Unknown,0,0,0
+NZ-0030,NZ-0030,,Jackson Bay Aerodrome,small_airport,Jackson Bay,-43.91599,168.88258,,,,Unknown,0,0,0
+NZ-0031,NZ-0031,,Cascade Lagoon Airstrip,small_airport,Jackson Bay,-44.02742,168.37023,,,,Unknown,0,0,0
+NZ-0032,NZ-0032,,Hope River Airstrip,small_airport,Jackson Bay,-44.08595,168.3253,,,,Unknown,0,0,0
+NZ-0033,NZ-0033,,Hollyford River Aerodrome,small_airport,Jamestown,-44.36083,168.00876,,,,Unknown,0,0,0
+NZ-0034,NZ-0034,,Hollyford Airstrip,small_airport,Milford Sound,-44.7369,168.13302,,,,Unknown,0,0,0
+NZ-0035,NZ-0035,,Cascade Station Airstrip,small_airport,Jackson Bay,-44.09453,168.5187,,,,Unknown,0,0,0
+NZ-0036,NZ-0036,,Karangarua River Airstrip,small_airport,Karangarua,-43.56787,169.78517,,,,Unknown,0,0,0
+NZ-0037,NZ-0037,,Paringa Airstrip,small_airport,Paringa,-43.7131,169.47975,,,,Unknown,0,0,0
+NZ-0038,NZ-0038,,Cook Flat Airstrip,small_airport,Fox Glacier,-43.45774,169.93639,,,,Unknown,0,0,0
+NZ-0039,NZ-0039,,Te Paki Airport,small_airport,Te Kao,-34.49023,172.76732,595,,,Unknown,0,0,0
+NZ-0041,NZ-0041,,Rarawa Airport,small_airport,Ngataki,-34.70214,173.02269,171,,,Unknown,0,0,0
+NZ-0042,NZ-0042,,Ngataki Airport,small_airport,Ngataki,-34.76319,173.05531,194,,,Unknown,0,0,0
+NZ-0043,NZ-0043,,Waihopo Airstrip,small_airport,Houhora,-34.77493,173.09582,10,,,Unknown,0,0,0
+NZ-0044,NZ-0044,,Houhora North Airstrip,small_airport,Houhora,-34.76675,173.11199,180,,,Unknown,0,0,0
+NZ-0045,NZ-0045,,Sandhills Airstrip,small_airport,Awanui,-35.05828,173.21385,85,,,Unknown,0,0,0
+NZ-0046,NZ-0046,,Puriri Block Airstrip,small_airport,Kaingaroa,-35.06246,173.33653,482,,,Unknown,0,0,0
+NZ-0047,NZ-0047,,Fisher Riley North Airstrip,small_airport,Kaitaia,-35.07869,173.36623,481,,,Unknown,0,0,0
+NZ-0048,NZ-0048,,Fisher Riley South Airstrip,small_airport,Kaitaia,-35.10338,173.36966,340,,,Unknown,0,0,0
+NZ-0049,NZ-0049,,Pamapuria Airstrip,small_airport,Kaitaia,-35.13336,173.36834,302,,,Unknown,0,0,0
+NZ-0050,NZ-0050,,Te Rore Airstrip,small_airport,Kaitaia,-35.1806,173.37799,978,,,Unknown,0,0,0
+NZ-0051,NZ-0051,,Takahue Airstrip,small_airport,Kaitaia,-35.21042,173.34838,497,,,Unknown,0,0,0
+NZ-0052,NZ-0052,,Broadwood Airstrip,small_airport,Broadwood,-35.25414,173.37782,413,,,Unknown,0,0,0
+NZ-0053,NZ-0053,,Pukemiro Airstrip,small_airport,Broadwood,-35.24984,173.35164,599,,,Unknown,0,0,0
+NZ-0054,NZ-0054,,Wairapakuru Airstrip,small_airport,Broadwood,-35.25494,173.44751,640,,,Unknown,0,0,0
+NZ-0055,NZ-0055,,Ngatieke Airstrip,small_airport,Broadwood,-35.26833,173.4582,774,,,Unknown,0,0,0
+NZ-0056,NZ-0056,,Ahu Airstrip,small_airport,Kohukohu,-35.29343,173.46148,479,,,Unknown,0,0,0
+NZ-0057,NZ-0057,,Paponga Airstrip,small_airport,Broadwood,-35.29016,173.42451,723,,,Unknown,0,0,0
+NZ-0058,NZ-0058,,Pawarenga Road Airstrip,small_airport,Broadwood,-35.29625,173.36919,367,,,Unknown,0,0,0
+NZ-0059,NZ-0059,,Runaruna Airstrip,small_airport,Broadwood,-35.32377,173.33705,410,,,Unknown,0,0,0
+NZ-0060,NZ-0060,,Kohe Airstrip,small_airport,Pawarenga,-35.31355,173.29435,349,,,Unknown,0,0,0
+NZ-0061,NZ-0061,,Mangamuka Bridge Airstrip,small_airport,Mangamuka,-35.24734,173.5394,371,,,Unknown,0,0,0
+NZ-0062,NZ-0062,,Rotokoma Airstrip,small_airport,Umawera,-35.26083,173.56304,,,,Unknown,0,0,0
+NZ-0063,NZ-0063,,Kahikatoa Airstrip,small_airport,Umawera,-35.28273,173.5509,,,,Unknown,0,0,0
+NZ-0064,NZ-0064,,Umawera Airstrip,small_airport,Umawera,-35.28507,173.59184,,,,Unknown,0,0,0
+NZ-0065,NZ-0065,,Rangiahua Airstrip,small_airport,Horeke,-35.31565,173.64982,,,,Unknown,0,0,0
+NZ-0066,NZ-0066,,Waimaho Airstrip,small_airport,Ōkaihau,-35.33185,173.69893,,,,Unknown,0,0,0
+NZ-0068,NZ-0068,,Waihou Valley Airstrip,small_airport,Ōkaihau,-35.29749,173.73129,,,,Unknown,0,0,0
+NZ-0069,NZ-0069,,Omapere Airstrip,small_airport,Kaikohe,-35.38804,173.78561,,,,Unknown,0,0,0
+NZ-0070,NZ-0070,,Remuera Settlement Airstrip,small_airport,Kaikohe,-35.37404,173.82952,,,,Unknown,0,0,0
+NZ-0071,NZ-0071,,Maungaparenua Airstrip,small_airport,Waipapa,-35.21926,173.87409,,,,Unknown,0,0,0
+NZ-0072,NZ-0072,,Pouerua Airstrip,small_airport,Pakaraka,-35.37092,173.93817,,,,Unknown,0,0,0
+NZ-0073,NZ-0073,,Waiaruhe Airstrip,small_airport,Pakaraka,-35.35806,173.91905,,,,Unknown,0,0,0
+NZ-0075,NZ-0075,,Te Kene Airstrip,small_airport,Pakaraka,-35.33878,173.97719,,,,Unknown,0,0,0
+NZ-0076,NZ-0076,,Toots Airstrip,small_airport,Kawakawa,-35.38188,174.09782,,,,Unknown,0,0,0
+NZ-0077,NZ-0077,,Waitotehoanga Airstrip,small_airport,Maromaku,-35.46282,174.09264,,,,Unknown,0,0,0
+NZ-0078,NZ-0078,,Maromaku West Airstrip,small_airport,Maromaku,-35.46502,174.0892,,,,Unknown,0,0,0
+NZ-0079,NZ-0079,,Ruapekapeka Airstrip,small_airport,Hūkerenui,-35.4657,174.16772,,,,Unknown,0,0,0
+NZ-0080,NZ-0080,,Koheroa Airstrip,small_airport,Hūkerenui,-35.46497,174.18424,,,,Unknown,0,0,0
+NZ-0084,NZ-0084,,Waro Airstrip,small_airport,Hikurangi,-35.58069,174.27472,,,,Unknown,0,0,0
+NZ-0085,NZ-0085,,Tahere Airstrip,small_airport,Whareora,-35.69626,174.43641,,,,Unknown,0,0,0
+NZ-0086,NZ-0086,,Mount Hutt Station Airstrip,small_airport,Methven,-43.52892,171.61364,,,,Unknown,0,0,0
+NZ-0092,NZ-0092,,Anama airstrip,small_airport,Anama,-43.79376,171.39393,1002,,,Unknown,0,0,0
+NZ-0102,NZ-0102,,Hanmer Springs Aerodrome,small_airport,Hanmer Springs,-42.56976,172.7973,,,,Unknown,0,0,0
+NZ-0106,NZ-0106,,Westray Farm Airstrip,small_airport,Te Anau,-45.44279,167.77657,,,,Unknown,0,0,0
+NZAE,NZAE,,Mount Tarawera Airport,small_airport,Mount Tarawera,-38.233,176.517,3100,,,Unknown,0,0,0
+NZAN,NZAN,,Alfredton Airport,small_airport,Alfredton,-40.6981,175.856,500,,,Unknown,0,0,0
+NZCG,NZCG,,Centennial Park Aerodrome,small_airport,Taupo,-38.66528,176.13472,1506,,,Unknown,0,0,0
+NZCS,NZCS,,Cromwell Racecourse Aerodrome,small_airport,,-45.0486,169.17101,856,,,Unknown,0,0,0
+NZES,NZES,,Wharepapa South Airport,small_airport,,-38.14388,175.5504,443,,,Unknown,0,0,0
+NZFE,NZFE,,Fernside Fields Airpark,small_airport,Fenside,-43.31747,172.51196,195,,,Unknown,0,0,0
+NZFP,NZFP,,Foxpine Aerodrome,small_airport,,-40.4567,175.27,39,,,Unknown,0,0,0
+NZGC,NZGC,,Gore3 Airport,small_airport,,-46.1567,168.898,200,,,Unknown,0,0,0
+NZGR,NZGR,,Great Mercury Airport,small_airport,Great Mercury Island / Ahuahu,-36.59363,175.7646,180,,,Unknown,0,0,0
+NZKM,NZKM,,Karamea Airport,small_airport,,-41.2367,172.105,30,,,Unknown,0,0,0
+NZKO,NZKO,KKO,Kaikohe Airport,small_airport,Kaikohe,-35.4511,173.817,571,,,Unknown,0,0,0
+NZLD,NZLD,,Limestone Downs Airport,small_airport,Limestone Downs,-37.48,174.745,596,,,Unknown,0,0,0
+NZLE,NZLE,,Lake Station Airport,small_airport,,-41.7592,172.746,1709,,,Unknown,0,0,0
+NZME,NZME,,Mercer1 PDZ Airport,small_airport,,-37.2575,175.115,30,,,Unknown,0,0,0
+NZML,NZML,,Molesworth Airport,small_airport,Molesworth,-42.083,173.283,2813,,,Unknown,0,0,0
+NZMR,NZMR,,Murchison Airport,small_airport,Murchison,-41.7967,172.315,531,,,Unknown,0,0,0
+NZMZ,NZMZ,,Matakana Island Airport,small_airport,Matakana Island,-37.6,176.08299,95,,,Unknown,0,0,0
+NZNF,NZNF,,Norfolk Airport,small_airport,Inglewood,-39.20512,174.22257,875,,,Unknown,0,0,0
+NZOA,NZOA,,Omarama Glider Airport,small_airport,,-44.4867,169.98599,1381,,,Unknown,0,0,0
+NZOF,NZOF,,Omaha Flats Airport,small_airport,,-36.34679,174.75894,15,,,Unknown,0,0,0
+NZOI,NZOI,,Motiti Island Airport,small_airport,Motiti Island,-37.633,176.41701,135,,,Unknown,0,0,0
+NZOM,NZOM,,Omaka Blenheim Airport,small_airport,Blenheim,-41.54,173.922,102,,,Grass,0,3,0
+NZOP,NZOP,,Opotiki Airport,small_airport,,-38.0225,177.30701,30,,,Unknown,0,0,0
+NZOT,NZOT,,Otaki Airport,small_airport,Otaki,-40.78558,175.1513,114,,,Unknown,0,0,1
+NZPH,NZPH,,Pudding Hill Aerodrome,small_airport,,-43.5942,171.53101,1558,,,Unknown,0,0,0
+NZPO,NZPO,,Pōrangahau Aerodrome,small_airport,Pōrangahau,-40.27926,176.6502,200,,,Unknown,0,0,0
+NZPW,NZPW,,Papawai Airfield,small_airport,Papawai,-41.10401,175.50033,128,,,Unknown,0,0,0
+NZRA,NZRA,RAG,Raglan Aerodrome,small_airport,Raglan,-37.8047,174.86,10,,,Unknown,0,0,0
+NZRR,NZRR,,Ruatoria Airfield,small_airport,,-37.88295,178.28972,250,,,Unknown,0,0,0
+NZRW,NZRW,,Ruawai Aerodrome,small_airport,,-36.0972,173.97701,62,,,Unknown,0,0,0
+NZRX,NZRX,,Roxburgh Aerodrome,small_airport,,-45.5117,169.317,463,,,Unknown,0,0,0
+NZSD,NZSD,,Stratford Airport,small_airport,Stratford,-39.3189,174.31,951,,,Unknown,0,0,0
+NZSF,NZSF,,Springfield Airport,small_airport,Springfield,-43.38358,171.91127,1216,,,Unknown,0,0,0
+NZTA,NZTA,,Te Aroha Airfield,small_airport,,-37.4747,175.618,30,,,Unknown,0,0,0
+NZTH,NZTH,TMZ,Thames Aerodrome,small_airport,,-37.1567,175.55,10,,,Unknown,0,0,0
+NZTI,NZTI,,Taieri Aerodrome,small_airport,Dunedin,-45.86125,170.36284,92,,,Unknown,0,0,0
+NZTK,NZTK,KTF,Takaka Airport,small_airport,,-40.8133,172.77499,102,,,Unknown,0,0,0
+NZTM,NZTM,,Taumarunui Airport,small_airport,,-38.8394,175.26199,902,,,Unknown,0,0,0
+NZTN,NZTN,,Turangi Airport,small_airport,,-38.9683,175.814,1220,,,Unknown,0,0,0
+NZVL,NZVL,,Mandeville Aerodrome,small_airport,,-45.9903,168.812,351,,,Unknown,0,0,0
+NZVR,NZVR,,Taihape Airport,small_airport,Taihape,-39.685,175.789,1550,,,Unknown,0,0,0
+NZWM,NZWM,,Waimate Airport,small_airport,Waimate,-44.79034,171.09009,79,,,Unknown,0,0,0

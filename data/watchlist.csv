@@ -1,0 +1,161 @@
+hex,rego,type,aircraft,seats
+c829e2,ZK-APL,B350,Beech King Air 350,10
+c82285,ZK-SSH,B350,Beech King Air 350,10
+c8284a,ZK-VME,B350,Beech King Air 350,10
+c8185c,ZK-VAS,DHC3,DHC-3 Otter,10
+c80a0e,ZK-EVO,BN2P,Britten-Norman Islander,9
+c80d98,ZK-FWZ,BN2P,Britten-Norman Islander,9
+c80daf,ZK-FXE,BN2P,Britten-Norman Islander,9
+c8125a,ZK-PIY,BN2P,Britten-Norman Islander,9
+c81190,ZK-PIZ,BN2P,Britten-Norman Islander,9
+c80f85,ZK-SFK,BN2P,Britten-Norman Islander,9
+c8287a,ZK-EAV,C208,Cessna 208 Caravan,9
+c82971,ZK-EXX,C208,Cessna 208 Caravan,9
+c82218,ZK-JMP,C208,Cessna 208 Caravan,9
+c81de6,ZK-KPH,C208,Cessna 208 Caravan,9
+c82509,ZK-MCI,C208,Cessna 208 Caravan,9
+c823a7,ZK-MCL,C208,Cessna 208 Caravan,9
+c82817,ZK-MCS,C208,Cessna 208 Caravan,9
+c8299b,ZK-MLN,C208,Cessna 208 Caravan,9
+c82a80,ZK-MLO,C208,Cessna 208 Caravan,9
+c82928,ZK-MMZ,C208,Cessna 208 Caravan,9
+c82300,ZK-MSF,C208,Cessna 208 Caravan,9
+c82075,ZK-NZO,C208,Cessna 208 Caravan,9
+c811de,ZK-PDM,C208,Cessna 208 Caravan,9
+c82508,ZK-PDZ,C208,Cessna 208 Caravan,9
+c829cf,ZK-PPR,C208,Cessna 208 Caravan,9
+c81da1,ZK-ROK,C208,Cessna 208 Caravan,9
+c82a0c,ZK-ROW,C208,Cessna 208 Caravan,9
+c823ec,ZK-RUL,C208,Cessna 208 Caravan,9
+c81ac5,ZK-SAA,C208,Cessna 208 Caravan,9
+c81a1b,ZK-SAN,C208,Cessna 208 Caravan,9
+c81ab7,ZK-SAY,C208,Cessna 208 Caravan,9
+c822af,ZK-SDB,C208,Cessna 208 Caravan,9
+c82513,ZK-SDC,C208,Cessna 208 Caravan,9
+c8221c,ZK-SDD,C208,Cessna 208 Caravan,9
+c82a2d,ZK-SDG,C208,Cessna 208 Caravan,9
+c82154,ZK-SKA,C208,Cessna 208 Caravan,9
+c818d9,ZK-SKB,C208,Cessna 208 Caravan,9
+c82317,ZK-SKM,C208,Cessna 208 Caravan,9
+c824f7,ZK-SKY,C208,Cessna 208 Caravan,9
+c82830,ZK-SLA,C208,Cessna 208 Caravan,9
+c8167d,ZK-SRI,C208,Cessna 208 Caravan,9
+c823df,ZK-SRX,C208,Cessna 208 Caravan,9
+c82458,ZK-TTS,C208,Cessna 208 Caravan,9
+c81bd7,ZK-SVI,C404,Cessna 404 Titan,9
+c8224b,B-10CV,P750,PAC 750XL,9
+c822b1,B-10EF,P750,PAC 750XL,9
+c81d17,ZK-DVE,P750,PAC 750XL,9
+c828ba,ZK-EPH,P750,PAC 750XL,9
+c828ee,ZK-EPK,P750,PAC 750XL,9
+c82873,ZK-EPL,P750,PAC 750XL,9
+c8170d,ZK-FNZ,P750,PAC 750XL,9
+c818f7,ZK-JBC,P750,PAC 750XL,9
+c81eb2,ZK-JJM,P750,PAC 750XL,9
+c8200c,ZK-KCE,P750,PAC 750XL,9
+c82079,ZK-KCG,P750,PAC 750XL,9
+c82387,ZK-KDD,P750,PAC 750XL,9
+c823ba,ZK-KDE,P750,PAC 750XL,9
+c82408,ZK-KDL,P750,PAC 750XL,9
+c8250c,ZK-KEC,P750,PAC 750XL,9
+c82471,ZK-KED,P750,PAC 750XL,9
+c827cd,ZK-KEI,P750,PAC 750XL,9
+c82874,ZK-KEO,P750,PAC 750XL,9
+c81acc,ZK-PNX,P750,PAC 750XL,9
+c81c31,ZK-SDF,P750,PAC 750XL,9
+c81e13,ZK-SDT,P750,PAC 750XL,9
+c81aa0,ZK-SWA,P750,PAC 750XL,9
+c8178e,ZK-TTL,P750,PAC 750XL,9
+c81546,ZK-XLA,P750,PAC 750XL,9
+c81bc4,ZK-XLB,P750,PAC 750XL,9
+c81e4b,ZK-XLC,P750,PAC 750XL,9
+c81c82,ZK-XLE,P750,PAC 750XL,9
+c818c3,ZK-XLK,P750,PAC 750XL,9
+c82897,ZK-PLB,PC12,Pilatus PC-12,9
+c82272,ZK-PLS,PC12,Pilatus PC-12,9
+c822bb,ZK-PLT,PC12,Pilatus PC-12,9
+c82431,ZK-PLV,PC12,Pilatus PC-12,9
+c82350,ZK-PLX,PC12,Pilatus PC-12,9
+c8229e,ZK-PLZ,PC12,Pilatus PC-12,9
+c81d25,ZK-FDR,BE20,Beech King Air 200,8
+c828bb,ZK-FDS,BE20,Beech King Air 200,8
+c82aa1,ZK-FDT,BE20,Beech King Air 200,8
+c82a08,ZK-LFA,BE20,Beech King Air 200,8
+c82a1b,ZK-LFI,BE20,Beech King Air 200,8
+c82a0f,ZK-LFL,BE20,Beech King Air 200,8
+c82b55,ZK-LFW,BE20,Beech King Air 200,8
+c82368,ZK-MDC,BE20,Beech King Air 200,8
+c822df,ZK-MFT,BE20,Beech King Air 200,8
+c81bce,ZK-PLK,BE20,Beech King Air 200,8
+c828a8,ZK-PMJ,BE20,Beech King Air 200,8
+c82a81,ZK-RSQ,BE20,Beech King Air 200,8
+c82923,ZK-SDH,BE20,Beech King Air 200,8
+c820ae,ZK-WPN,BE20,Beech King Air 200,8
+c82b3b,ZK=LFT,BE20,Beech King Air 200,8
+c811d9,ZK-MAP,C402,Cessna 402,8
+c80379,ZK-PVC,C402,Cessna 402,8
+c80e50,ZK-SVQ,C402,Cessna 402,8
+c8152e,ZK-NFD,C441,Cessna 441 Conquest,8
+c80af9,ZK-STV,C421,Cessna 421 Golden Eagle,7
+c827c7,ZK-EHS,GA8,GippsAero GA8 Airvan,7
+c823a1,ZK-FSR,GA8,GippsAero GA8 Airvan,7
+c820e1,ZK-JRR,GA8,GippsAero GA8 Airvan,7
+c816a3,ZK-KBZ,GA8,GippsAero GA8 Airvan,7
+c81726,ZK-LOR,GA8,GippsAero GA8 Airvan,7
+c81c74,ZK-MAB,GA8,GippsAero GA8 Airvan,7
+c82092,ZK-MCM,GA8,GippsAero GA8 Airvan,7
+c820e0,ZK-MCZ,GA8,GippsAero GA8 Airvan,7
+c823cd,ZK-MLF,GA8,GippsAero GA8 Airvan,7
+c81647,ZK-ORC,GA8,GippsAero GA8 Airvan,7
+c82812,ZK-PEL,GA8,GippsAero GA8 Airvan,7
+c8182e,ZK-SAE,GA8,GippsAero GA8 Airvan,7
+c81d2c,ZK-SAU,GA8,GippsAero GA8 Airvan,7
+c81948,ZK-SAZ,GA8,GippsAero GA8 Airvan,7
+c824e4,ZK-SLD,GA8,GippsAero GA8 Airvan,7
+c8177f,ZK-SLQ,GA8,GippsAero GA8 Airvan,7
+c8231a,ZK-SLW,GA8,GippsAero GA8 Airvan,7
+c827d0,ZK-WMF,GA8,GippsAero GA8 Airvan,7
+c82a21,ZK-YUG,GA8,GippsAero GA8 Airvan,7
+c82282,ZK-ZEA,GA8,GippsAero GA8 Airvan,7
+c82119,ZK-ZQN,GA8,GippsAero GA8 Airvan,7
+c827e4,ZK-ZUG,GA8,GippsAero GA8 Airvan,7
+c80bbe,ZK-CAL,PA31,Piper PA-31 Navajo,7
+c80bbf,ZK-CAM,PA31,Piper PA-31 Navajo,7
+c8285f,ZK-DSY,PA31,Piper PA-31 Navajo,7
+c810f4,ZK-ECQ,PA31,Piper PA-31 Navajo,7
+c80c01,ZK-FOP,PA31,Piper PA-31 Navajo,7
+c80a27,ZK-JGA,PA31,Piper PA-31 Navajo,7
+c81024,ZK-KVW,PA31,Piper PA-31 Navajo,7
+c80f2f,ZK-LTD,PA31,Piper PA-31 Navajo,7
+c8111c,ZK-LWN,PA31,Piper PA-31 Navajo,7
+c80faf,ZK-NPR,PA31,Piper PA-31 Navajo,7
+c80bc0,ZK-NSP,PA31,Piper PA-31 Navajo,7
+c8102f,ZK-RDT,PA31,Piper PA-31 Navajo,7
+c8200f,ZK-SRC,PA31,Piper PA-31 Navajo,7
+c80f0e,ZK-VIP,PA31,Piper PA-31 Navajo,7
+c8121d,ZK-WHW,PA31,Piper PA-31 Navajo,7
+c81e82,ZK-FDN,BE9L,Beech King Air C90,6
+c818fd,ZK-MKG,BE9L,Beech King Air C90,6
+c81e79,ZK-SKL,BE9L,Beech King Air C90,6
+c81e5e,ZK-ZZA,BE9L,Beech King Air C90,6
+c80c76,ZK-FQY,C207,Cessna 207 Skywagon,6
+c820d8,ZK-AMA,DHC2,DHC-2 Beaver,6
+c80095,ZK-AZB,DHC2,DHC-2 Beaver,6
+c827da,ZK-BVA,DHC2,DHC-2 Beaver,6
+c80ab6,ZK-CKH,DHC2,DHC-2 Beaver,6
+c80c27,ZK-FPZ,DHC2,DHC-2 Beaver,6
+c82927,ZK-LAV,DHC2,DHC-2 Beaver,6
+c82771,ZK-SBV,DHC2,DHC-2 Beaver,6
+c80b20,ZK-LAL,P68,Partenavia/Vulcanair P68,6
+c8111e,ZK-MIR,P68,Partenavia/Vulcanair P68,6
+c804a2,ZK-MYF,P68,Partenavia/Vulcanair P68,6
+c806cd,ZK-NMK,P68,Partenavia/Vulcanair P68,6
+c829f0,ZK-RAT,P68,Partenavia/Vulcanair P68,6
+c81946,ZK-TCP,P68,Partenavia/Vulcanair P68,6
+c8173a,ZK-TZZ,P68,Partenavia/Vulcanair P68,6
+c8114f,ZK-ZSP,P68,Partenavia/Vulcanair P68,6
+c80670,ZK-MCK,PC6T,Pilatus PC-6 Porter,6
+c80672,ZK-MCN,PC6T,Pilatus PC-6 Porter,6
+c80678,ZK-MCT,PC6T,Pilatus PC-6 Porter,6
+c817b6,ZK-PCI,PC6T,Pilatus PC-6 Porter,6
+c819b6,ZK-XIT,PC6T,Pilatus PC-6 Porter,6
