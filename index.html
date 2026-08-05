@@ -65,8 +65,8 @@ a{color:var(--s1)}
     <div class="card" style="flex:1;min-width:220px">
       <div class="k">Window</div>
       <div class="tabs" style="margin:6px 0 4px">
-        <button class="tab" data-w="live">Live</button>
-        <button class="tab on" data-w="day">Today</button>
+        <button class="tab on" data-w="live">Live</button>
+        <button class="tab" data-w="day">Today</button>
         <button class="tab" data-w="week">Week</button>
         <button class="tab" data-w="month">Month</button>
         <button class="tab" data-w="all">All-time</button>
@@ -99,15 +99,18 @@ a{color:var(--s1)}
 
   <div class="foot">Positions & coverage: community ADS-B (adsb.lol, ODbL — this open repository republishes
   the derived flight database, satisfying share-alike). Aircraft class from the NZ CAA register.
-  Aerodromes/runways: OurAirports. Sampling every ~5 min: very short hops (&lt;10 min) can be missed and
-  leg counts are lower bounds. Coverage is thin at low level in Fiordland / Stewart Island / West Coast —
-  flights there are under-counted. A flight with an unsnapped start or end (receiver gap) is shown dashed
-  and excluded from the headline %.</div>
+  Aerodromes/runways: OurAirports. Sampling asks GitHub Actions for every 5 min but gets far less —
+  observed spacing has been ~60–145 min, so most trips pass entirely between two sweeps. A trip is only
+  archived once it has been seen moving between two different aerodromes and its total distance is
+  therefore known; traces still in the air, or seen only once, are dropped rather than logged with an
+  invented distance. The archive is a strict undercount, not a census. Coverage is also thin at low level
+  in Fiordland / Stewart Island / West Coast. The Live tab shows the last committed sweep, not the current
+  sky — browsers cannot query adsb.lol directly.</div>
 </div>
 
 <script>
-const S={w:'day',range:900,rt:false,minRwy:800};
-let FL=[],AERO={},OUT=null,LATEST=null,WATCH={};
+const S={w:'live',range:900,rt:false,minRwy:800};
+let FL=[],AERO={},OUT=null,LATEST=null,WATCH={},LIVEFRESH=false;
 
 function csv(text){ // minimal quoted-CSV parser
   const rows=[];let row=[],cur='',q=false;
@@ -209,10 +212,13 @@ function refresh(){
   const names={live:'right now',day:'today',week:'past 7 days',month:'past 30 days',all:'since collection began'};
   if(S.w==='live'){
     const n=LATEST?.ac?.length??0,t=LATEST?new Date(LATEST.t*1000):null;
-    document.getElementById('heroK').textContent='In-class aircraft airborne right now';
+    const age=t?Math.round((Date.now()-t)/60000):null;
+    const clock=t?t.toLocaleTimeString('en-NZ',{timeZone:'Pacific/Auckland',hour:'2-digit',minute:'2-digit'}):'';
+    document.getElementById('heroK').textContent=LIVEFRESH?'In-class aircraft airborne right now':'In-class aircraft airborne at the last sweep';
     document.getElementById('heroV').innerHTML=n+' <small>aircraft</small>';
-    document.getElementById('heroN').textContent=(t?'as of '+t.toLocaleTimeString('en-NZ',{timeZone:'Pacific/Auckland',hour:'2-digit',minute:'2-digit'})+' NZT · ':'')+
-      'a single instant is always a small number — flip to Today/Week/Month for volume';
+    document.getElementById('heroN').textContent=!t?'no sweep data yet':
+      LIVEFRESH?`live from adsb.lol, ${clock} NZT · a single instant is always a small number — flip to Today/Week/Month for volume`:
+      `${clock} NZT — ${age} min old. Browsers can't query adsb.lol directly (no CORS), so this shows the last sweep committed by GitHub Actions, not the current sky.`;
   }else{
     document.getElementById('heroK').textContent='Flights our aircraft could have flown — '+names[S.w];
     document.getElementById('heroV').innerHTML=comp.length?Math.round(ok/comp.length*100)+'% <small>'+ok+' of '+comp.length+' flights</small>':'—';
@@ -248,9 +254,9 @@ async function liveRefresh(){
                   rego:WATCH[h].rego,ac:WATCH[h].aircraft,seats:WATCH[h].seats};
       }
     }
-    LATEST={t:Date.now()/1000,ac:Object.values(acs)};
-  }catch(e){/* keep latest.json fallback */}
-  refresh();
+    LATEST={t:Date.now()/1000,ac:Object.values(acs)};LIVEFRESH=true;
+  }catch(e){LIVEFRESH=false} // adsb.lol sends no CORS header to a browser, so this
+  refresh();                 // normally fails; fall back to the last sweep's latest.json
 }
 
 async function init(){
@@ -266,13 +272,14 @@ async function init(){
   try{LATEST=await fetch('data/latest.json?'+Date.now()).then(r=>r.json())}catch(e){LATEST=null}
   FL.sort((a,b)=>a.t0-b.t0);
   if(!FL.length){const b=document.getElementById('banner');b.style.display='block';
-    b.textContent='Collecting — the archive starts with the first night\'s segmentation run. The Live tab already works; Today fills in tomorrow, Week after a week, and it only ever grows from there.'}
+    b.textContent='Archive empty. A trip is only recorded once it has been seen moving between two different aerodromes — anything caught mid-air, or seen only once, is dropped rather than logged with a distance we would be guessing at. At the sweep spacing GitHub is currently granting, that will be rare; see the note at the foot of this page.'}
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.w=b.dataset.w;
-    if(S.w==='live')liveRefresh();else refresh()});
+    refresh();if(S.w==='live')liveRefresh()});  // paint from cache first: liveRefresh
+                                                // awaits a fetch that usually fails
   document.getElementById('rng').oninput=e=>{S.range=+e.target.value;refresh()};
   document.getElementById('rt').onchange=e=>{S.rt=e.target.checked;refresh()};
   document.getElementById('rwy').onchange=e=>{S.minRwy=+e.target.value;refresh()};
-  refresh();
+  refresh();if(S.w==='live')liveRefresh();
 }
 init();
 </script>
