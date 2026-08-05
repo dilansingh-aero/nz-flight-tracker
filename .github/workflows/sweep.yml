@@ -1,7 +1,12 @@
 name: sweep
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 min (GitHub's floor; may run a few min late)
+    # An hourly kick across a UTC window wide enough to cover NZ first light to
+    # last light all year (earliest sunrise ~05:45, latest sunset ~21:10 local).
+    # NOT */5: GitHub throttles high-frequency crons hard - a '*/5' schedule was
+    # observed firing every 60-145 min - so each kick loops internally instead,
+    # which is the only way to get real 5-minute sampling out of free Actions.
+    - cron: '0 16-23,0-9 * * *'
   workflow_dispatch:
 concurrency:
   group: data-writes
@@ -11,14 +16,21 @@ permissions:
 jobs:
   sweep:
     runs-on: ubuntu-latest
+    timeout-minutes: 58
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/sweep.py
-      - name: commit
+      - name: sweep every 5 min, segment trips as they finish
         run: |
           git config user.name "sweep-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet && exit 0
-          git commit -m "sweep $(date -u +%H:%M)"
-          git pull --rebase && git push
+          for i in $(seq 1 11); do
+            python3 scripts/sweep.py
+            # Etc/GMT-12 is UTC+12 - the same fixed NZT sweep.py files raw under
+            python3 scripts/segment.py "$(TZ=Etc/GMT-12 date +%F)" --keep-raw
+            git add data/
+            if ! git diff --cached --quiet; then
+              git commit -m "sweep $(TZ=Etc/GMT-12 date +%H:%M)"
+              git pull --rebase && git push || echo "push deferred to next cycle"
+            fi
+            if [ "$i" -lt 11 ]; then sleep 300; fi
+          done

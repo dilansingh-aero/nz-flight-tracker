@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
-"""Nightly (00:20 NZT): turn yesterday's raw sightings into flights, append to
-data/flights.json (append-only - flights are NEVER deleted), gzip the raw file.
-A trace is only logged as a flight once its total trip distance is known: seen
-moving, and snapped to two different aerodromes. Anything still in the air, or
-seen only once, is dropped rather than archived with a distance we guessed."""
+"""Sightings -> flights.  segment.py [YYYY-MM-DD] [--keep-raw]
+
+Run two ways:
+  during the day, every few minutes, on TODAY with --keep-raw, so finished trips
+    show up on the site within minutes of landing instead of after midnight;
+  once at 00:20 NZT on the day that just ended, without --keep-raw, which also
+    compacts that day's raw sightings to .gz.
+
+A trace only becomes a flight once its distance is actually known: seen moving,
+and snapped to two different aerodromes.  Anything still in the air, or seen
+only once, is dropped rather than archived with a distance we guessed.
+
+The day being segmented is rebuilt from its raw file each run.  Every other day
+in the archive is left untouched - those are still never deleted."""
 import csv, gzip, json, math, os, sys
 from datetime import datetime, timezone, timedelta
 
@@ -17,7 +26,9 @@ def hav(a, b, c, d):
     x = math.sin((c - a) * p / 2) ** 2 + math.cos(a * p) * math.cos(c * p) * math.sin((d - b) * p / 2) ** 2
     return 12742 * math.asin(math.sqrt(x))
 
-day = sys.argv[1] if len(sys.argv) > 1 else (datetime.now(NZT) - timedelta(days=1)).strftime('%Y-%m-%d')
+keep_raw = '--keep-raw' in sys.argv
+days = [a for a in sys.argv[1:] if not a.startswith('--')]
+day = days[0] if days else (datetime.now(NZT) - timedelta(days=1)).strftime('%Y-%m-%d')
 raw_path = f'{BASE}/data/raw/{day}.jsonl'
 if not os.path.exists(raw_path):
     print(f'no raw for {day}'); sys.exit(0)
@@ -39,7 +50,7 @@ for line in open(raw_path):
     byhex.setdefault(s['hex'], []).append(s)
 
 flights = json.load(open(f'{BASE}/data/flights.json'))
-have = {(f['date'], f['hex'], f['t0']) for f in flights}
+flights = [f for f in flights if f.get('date') != day]   # this day gets rebuilt below
 new, unknown = 0, 0
 for h, sights in byhex.items():
     sights.sort(key=lambda s: s['t'])
@@ -62,17 +73,20 @@ for h, sights in byhex.items():
         if len(r) < 2 or not orig or not dest or orig == dest:
             unknown += 1
             continue
-        km = round(hav(f0['lat'], f0['lon'], f1['lat'], f1['lon']))
+        km = round(hav(f0['lat'], f0['lon'], f1['lat'], f1['lon']))       # direct, gates range
+        track = round(sum(hav(a['lat'], a['lon'], b['lat'], b['lon'])     # actually flown
+                          for a, b in zip(r, r[1:])))
         rec = {'date': day, 'hex': h, 'rego': w['rego'], 'type': w['type'], 'ac': w['aircraft'],
                'seats': int(w['seats']), 't0': f0['t'], 't1': f1['t'], 'orig': orig, 'dest': dest,
-               'km': km, 'n': len(r), 'complete': True,
-               'pts': [[s['lat'], s['lon']] for s in r][:50]}
-        if (day, h, f0['t']) not in have:
-            flights.append(rec); new += 1
+               'km': km, 'track_km': track, 'n': len(r), 'complete': True,
+               'pts': [[s['lat'], s['lon']] for s in r][:200]}
+        flights.append(rec); new += 1
 
+flights.sort(key=lambda f: (f['date'], f['t0']))
 json.dump(flights, open(f'{BASE}/data/flights.json', 'w'), separators=(',', ':'))
-with open(raw_path, 'rb') as fi, gzip.open(raw_path + '.gz', 'wb') as fo:
-    fo.write(fi.read())
-os.remove(raw_path)   # raw compacted; FLIGHTS are kept forever
+if not keep_raw:      # the day is over: compact its sightings, keep the flights forever
+    with open(raw_path, 'rb') as fi, gzip.open(raw_path + '.gz', 'wb') as fo:
+        fo.write(fi.read())
+    os.remove(raw_path)
 print(f'{day}: +{new} flights (total {len(flights)}), {len(byhex)} airframes active, '
       f'{unknown} traces dropped (trip distance unknown)')

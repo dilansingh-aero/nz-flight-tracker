@@ -9,9 +9,14 @@ return-trip and minimum-runway gates included). Flights accumulate every night a
 No servers, no database, no subscriptions, no card on file:
 
 - **GitHub Actions** (free on public repos) polls [adsb.lol](https://adsb.lol) every 5 minutes
-  and commits sightings of the 160-aircraft civil watchlist.
-- A **nightly job** (00:20 NZT) turns sightings into flights → `data/flights.json`
-  (append-only archive).
+  from **first light to last light NZ time**, committing sightings of the 160-aircraft civil
+  watchlist. GitHub throttles 5-minutely crons hard — a `*/5` schedule was observed firing
+  every 60–145 min — so an hourly job loops internally instead of trusting the schedule.
+- Trips are segmented **as they land**, so the map fills during the day. A **nightly job**
+  (00:20 NZT) re-runs the finished day and compacts its raw sightings → `data/flights.json`
+  (append-only; only the day currently being segmented is ever rebuilt).
+- A trip is archived only once its distance is **measured**, not guessed: seen moving, and
+  snapped to two different aerodromes. Anything still airborne is left for the next run.
 - **GitHub Pages** (free) serves `index.html`, which reads that archive.
 - Keeping the repo **public** is what makes Actions free — and it automatically satisfies
   adsb.lol's ODbL share-alike licence, so it's a legal requirement solved for free too.
@@ -45,8 +50,8 @@ appending them to `data/flights.json` (rows in the same format).
 | File | What it does |
 |---|---|
 | `index.html` | The whole website (map, toggles, feasibility gates, flight table) |
-| `scripts/sweep.py` | 5-minutely: fetch NZ traffic, keep watchlist sightings |
-| `scripts/segment.py` | Nightly: sightings → flights; gzip raw; never touches old flights |
+| `scripts/sweep.py` | Every 5 min in daylight: fetch NZ traffic, keep watchlist sightings |
+| `scripts/segment.py` | Sightings → flights. `--keep-raw` for the intra-day runs; without it the nightly run also gzips the raw |
 | `.github/workflows/` | The two free schedules that run the scripts |
 | `data/watchlist.csv` | The class: 160 civil NZ airframes, 6–13 seats (military excluded) |
 | `data/aerodromes.csv` | NZ aerodromes + runway lengths (for snapping and runway gates) |
@@ -54,8 +59,12 @@ appending them to `data/flights.json` (rows in the same format).
 
 ## Honest limits (also stated in the site footer)
 
-- 5-minute sampling is GitHub's floor: hops shorter than ~10 min can be missed, so leg
-  counts are lower bounds (skydive quick-cycles undercount most).
+- 5-minute sampling is GitHub's floor, and its scheduler will not even honour that on a
+  cron — hence the internal loop. Hops that start and finish between two sweeps can still be
+  missed, so leg counts are lower bounds (skydive quick-cycles undercount most).
+- A trip that never snaps to two different aerodromes is never archived. That is deliberate —
+  it keeps invented distances out of the record — but it means the archive undercounts rather
+  than estimates. Trips still airborne at last light are simply not recorded.
 - Community receiver coverage is thin at low level in Fiordland, Stewart Island and the
   West Coast — flights there under-count until receivers are added.
 - GitHub's scheduler sometimes runs a few minutes late and can skip a cycle under load;

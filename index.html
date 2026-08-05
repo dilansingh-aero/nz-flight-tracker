@@ -92,20 +92,23 @@ a{color:var(--s1)}
   <div class="card" style="margin-top:14px">
     <div class="k" id="tblK">Flights</div>
     <table><thead><tr><th>Date</th><th>Rego</th><th>Aircraft</th><th>Seats</th>
-      <th>From → To</th><th style="text-align:right">km</th><th>Our aircraft?</th></tr></thead>
+      <th>From → To</th><th style="text-align:right">Direct km</th>
+      <th style="text-align:right">Flown km</th><th>Our aircraft?</th></tr></thead>
       <tbody id="tb"></tbody></table>
     <div class="n" id="tblN"></div>
   </div>
 
   <div class="foot">Positions & coverage: community ADS-B (adsb.lol, ODbL — this open repository republishes
   the derived flight database, satisfying share-alike). Aircraft class from the NZ CAA register.
-  Aerodromes/runways: OurAirports. Sampling asks GitHub Actions for every 5 min but gets far less —
-  observed spacing has been ~60–145 min, so most trips pass entirely between two sweeps. A trip is only
-  archived once it has been seen moving between two different aerodromes and its total distance is
-  therefore known; traces still in the air, or seen only once, are dropped rather than logged with an
-  invented distance. The archive is a strict undercount, not a census. Coverage is also thin at low level
-  in Fiordland / Stewart Island / West Coast. The Live tab shows the last committed sweep, not the current
-  sky — browsers cannot query adsb.lol directly.</div>
+  Aerodromes/runways: OurAirports. Sampled every ~5 min from first light to last light NZ time. GitHub's
+  scheduler throttles 5-minutely crons to roughly hourly, so sampling is driven from inside an hourly job
+  that loops, rather than by the schedule itself. <b>Direct km</b> is aerodrome to aerodrome and is what the
+  range slider tests; <b>Flown km</b> is the length of the track actually flown. A trip is archived only once
+  it has been seen moving between two different aerodromes, so its distance is measured rather than guessed —
+  traces still airborne, or seen only once, are dropped. Hops that begin and end between two sweeps can still
+  be missed, so leg counts stay lower bounds. Coverage is thin at low level in Fiordland / Stewart Island /
+  West Coast. The Live tab shows the last committed sweep, not the current sky — browsers cannot query
+  adsb.lol directly.</div>
 </div>
 
 <script>
@@ -191,17 +194,24 @@ function draw(){
       continue;
     }
     const o=AERO[f.orig],t=AERO[f.dest];if(!o||!t)continue;
-    const[x1,y1]=P(o.lon,o.lat),[x2,y2]=P(t.lon,t.lat);
-    const mx=(x1+x2)/2+(y1-y2)*.15,my=(y1+y2)/2+(x2-x1)*.15;
-    const p=el('path',{d:`M${x1} ${y1}Q${mx} ${my} ${x2} ${y2}`,fill:'none',
-      stroke:v.v==='ok'?'var(--good)':'var(--crit)','stroke-width':v.v==='ok'?1.8:1.4,
+    let d='';
+    if((f.pts||[]).length>1){                 // the route actually flown, point by point
+      f.pts.forEach((p,i)=>{const[x,y]=P(p[1],p[0]);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)});
+    }else{                                    // no track stored: fall back to a direct arc
+      const[x1,y1]=P(o.lon,o.lat),[x2,y2]=P(t.lon,t.lat);
+      const mx=(x1+x2)/2+(y1-y2)*.15,my=(y1+y2)/2+(x2-x1)*.15;
+      d=`M${x1} ${y1}Q${mx} ${my} ${x2} ${y2}`;
+    }
+    const p=el('path',{d,fill:'none',stroke:v.v==='ok'?'var(--good)':'var(--crit)',
+      'stroke-width':v.v==='ok'?1.8:1.4,'stroke-linejoin':'round','stroke-linecap':'round',
       opacity:v.v==='ok'?.75:.6},g);
-    el('title',{},p).textContent=`${f.rego} ${f.ac} · ${f.orig}→${f.dest} ${f.km} km · ${v.why}`;
+    el('title',{},p).textContent=`${f.rego} ${f.ac} · ${f.orig}→${f.dest} · ${f.km} km direct`+
+      (f.track_km?`, ${f.track_km} km flown`:'')+` · ${v.why}`;
     drawn++;
   }
   L.innerHTML=`<div class="it"><span class="sw" style="border-color:var(--good)"></span>our aircraft could fly it</div>
   <div class="it"><span class="sw" style="border-color:var(--crit)"></span>outside current settings</div>
-  <div class="it"><span class="sw dash" style="border-color:#9aa7b4"></span>incomplete trace (excluded from %)</div>`;
+  <div class="it">lines are the route actually flown, sampled every ~5 min</div>`;
 }
 
 function refresh(){
@@ -234,7 +244,8 @@ function refresh(){
     const tr=document.createElement('tr');
     tr.innerHTML=`<td>${f.date}</td><td>${f.rego||f.hex}</td><td>${f.ac}</td><td>${f.seats}</td>
       <td>${f.complete?f.orig+' → '+f.dest:'<i>partial trace</i>'}</td>
-      <td style="text-align:right">${f.km||''}</td>
+      <td style="text-align:right">${f.km??''}</td>
+      <td style="text-align:right">${f.track_km??''}</td>
       <td><span class="pill ${v.v}">${v.v==='ok'?'✓ yes':v.v==='no'?'✗ '+v.why:'— excluded'}</span></td>`;
     tb.appendChild(tr);
   }
@@ -272,7 +283,7 @@ async function init(){
   try{LATEST=await fetch('data/latest.json?'+Date.now()).then(r=>r.json())}catch(e){LATEST=null}
   FL.sort((a,b)=>a.t0-b.t0);
   if(!FL.length){const b=document.getElementById('banner');b.style.display='block';
-    b.textContent='Archive empty. A trip is only recorded once it has been seen moving between two different aerodromes — anything caught mid-air, or seen only once, is dropped rather than logged with a distance we would be guessing at. At the sweep spacing GitHub is currently granting, that will be rare; see the note at the foot of this page.'}
+    b.textContent='Archive empty. Trips are recorded as they land — a trace is only kept once it has been seen moving between two different aerodromes, so the distance is measured rather than guessed. Collection runs first light to last light NZ time; the first completed trips should appear within minutes of an aircraft landing.'}
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.w=b.dataset.w;
     refresh();if(S.w==='live')liveRefresh()});  // paint from cache first: liveRefresh
                                                 // awaits a fetch that usually fails
