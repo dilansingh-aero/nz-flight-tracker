@@ -103,7 +103,9 @@ a{color:var(--s1)}
   Aerodromes/runways: OurAirports. Sampled every ~5 min from first light to last light NZ time. GitHub's
   scheduler throttles 5-minutely crons to roughly hourly, so sampling is driven from inside an hourly job
   that loops, rather than by the schedule itself. <b>Direct km</b> is aerodrome to aerodrome and is what the
-  range slider tests; <b>Flown km</b> is the length of the track actually flown. A trip is archived only once
+  range slider tests. <b>Flown km</b> is the length of the <i>sampled</i> track: it reads longer than
+  direct when the route bends, and shorter when sampling began after takeoff or ended before landing,
+  which is usually. A trip is archived only once
   it has been seen moving between two different aerodromes, so its distance is measured rather than guessed —
   traces still airborne, or seen only once, are dropped. Hops that begin and end between two sweeps can still
   be missed, so leg counts stay lower bounds. Coverage is thin at low level in Fiordland / Stewart Island /
