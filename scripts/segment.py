@@ -35,6 +35,7 @@ if not os.path.exists(raw_path):
 
 watch = {r['hex']: r for r in csv.DictReader(open(f'{BASE}/data/watchlist.csv'))}
 aero = [(r['icao'], float(r['lat']), float(r['lon'])) for r in csv.DictReader(open(f'{BASE}/data/aerodromes.csv'))]
+AC = {a[0]: (a[1], a[2]) for a in aero}
 
 def snap(lat, lon):
     best, bd = None, SNAP_KM
@@ -73,7 +74,11 @@ for h, sights in byhex.items():
         if len(r) < 2 or not orig or not dest or orig == dest:
             unknown += 1
             continue
-        km = round(hav(f0['lat'], f0['lon'], f1['lat'], f1['lon']))       # direct, gates range
+        # Aerodrome to aerodrome, NOT first sighting to last: sampling starts after
+        # takeoff and stops before landing, which understated every route (NZHS-NZNR
+        # came out 8 km against a true 22) and so made trips look more reachable than
+        # they are - the opposite of the error this site can afford.
+        km = round(hav(AC[orig][0], AC[orig][1], AC[dest][0], AC[dest][1]))
         track = round(sum(hav(a['lat'], a['lon'], b['lat'], b['lon'])     # actually flown
                           for a, b in zip(r, r[1:])))
         rec = {'date': day, 'hex': h, 'rego': w['rego'], 'type': w['type'], 'ac': w['aircraft'],

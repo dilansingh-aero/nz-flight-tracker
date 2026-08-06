@@ -1,12 +1,14 @@
 name: sweep
 on:
   schedule:
-    # An hourly kick across a UTC window wide enough to cover NZ first light to
-    # last light all year (earliest sunrise ~05:45, latest sunset ~21:10 local).
-    # NOT */5: GitHub throttles high-frequency crons hard - a '*/5' schedule was
-    # observed firing every 60-145 min - so each kick loops internally instead,
-    # which is the only way to get real 5-minute sampling out of free Actions.
-    - cron: '0 16-23,0-9 * * *'
+    # GitHub throttles crons hard: '*/5' fired every 60-145 min, and even an
+    # hourly kick came every ~100 min, leaving 49-66 min holes between the
+    # 55-minute jobs. Kicking every 30 min keeps one run queued behind the
+    # concurrency group below, so the next starts as the last finishes and
+    # coverage is continuous. Real 5-minute sampling comes from the loop in the
+    # step, never from the schedule. The window is deliberately wider than NZ
+    # daylight; sweep.py itself skips when it is dark, so the slack is free.
+    - cron: '0,30 16-23,0-9 * * *'
   workflow_dispatch:
 concurrency:
   group: data-writes
