@@ -19,7 +19,8 @@ from datetime import datetime, timezone, timedelta
 BASE = os.path.join(os.path.dirname(__file__), '..')
 NZT = timezone(timedelta(hours=12))
 GAP = 35 * 60          # >35 min between sightings = new flight
-SNAP_KM = 8            # snap flight ends to an aerodrome within 8 km
+SNAP_KM = 20           # a flight end may be this far from the aerodrome ...
+SNAP_AGL = 8000        # ... but must also be this low above it (ft), or it is overflying
 
 def hav(a, b, c, d):
     p = math.pi / 180
@@ -34,15 +35,27 @@ if not os.path.exists(raw_path):
     print(f'no raw for {day}'); sys.exit(0)
 
 watch = {r['hex']: r for r in csv.DictReader(open(f'{BASE}/data/watchlist.csv'))}
-aero = [(r['icao'], float(r['lat']), float(r['lon'])) for r in csv.DictReader(open(f'{BASE}/data/aerodromes.csv'))]
+aero = [(r['icao'], float(r['lat']), float(r['lon']),
+         float(r['elev_ft']) if r.get('elev_ft') else 0.0)
+        for r in csv.DictReader(open(f'{BASE}/data/aerodromes.csv'))]
 AC = {a[0]: (a[1], a[2]) for a in aero}
 
-def snap(lat, lon):
-    best, bd = None, SNAP_KM
-    for icao, alat, alon in aero:
-        d = hav(lat, lon, alat, alon)
+def snap(s):
+    """The aerodrome this sighting is departing from or arriving at, else None.
+    Needs proximity AND a low height above that field. 8 km alone was far too
+    tight - sampling never catches an aircraft that close, only 32% of sightings
+    ever landed inside it - while 20 km alone would grab cruising traffic that
+    merely passes over a field. Together they select climb-out and approach."""
+    best, bd, belev = None, SNAP_KM, 0.0
+    for icao, alat, alon, elev in aero:
+        d = hav(s['lat'], s['lon'], alat, alon)
         if d < bd:
-            best, bd = icao, d
+            best, bd, belev = icao, d, elev
+    if best is None:
+        return None
+    alt = s.get('alt')
+    if not isinstance(alt, (int, float)) or alt - belev > SNAP_AGL:
+        return None
     return best
 
 byhex = {}
@@ -65,7 +78,7 @@ for h, sights in byhex.items():
     w = watch[h]
     for r in runs:
         f0, f1 = r[0], r[-1]
-        orig, dest = snap(f0['lat'], f0['lon']), snap(f1['lat'], f1['lon'])
+        orig, dest = snap(f0), snap(f1)
         # Only log a trip whose total distance we actually know: it must have been seen
         # moving (>=2 sightings) and have snapped to two DIFFERENT aerodromes. A single
         # sighting, or one that ends mid-air or back where it started, tells us nothing

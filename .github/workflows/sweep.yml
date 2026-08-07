@@ -18,14 +18,19 @@ permissions:
 jobs:
   sweep:
     runs-on: ubuntu-latest
-    timeout-minutes: 58
+    # Actions allows 6 h. GitHub only actually CREATES ~4 scheduled runs a day for
+    # this repo however often the cron asks, so a 55-minute job could only ever
+    # cover ~3 h of an 11 h flying day - on 07 Aug the entire morning was missed.
+    # One long job per start covers the day instead. Night iterations are free:
+    # sweep.py returns immediately when it is dark.
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
       - name: sweep every 5 min, segment trips as they finish
         run: |
           git config user.name "sweep-bot"
           git config user.email "actions@users.noreply.github.com"
-          for i in $(seq 1 11); do
+          for i in $(seq 1 66); do
             python3 scripts/sweep.py
             # Etc/GMT-12 is UTC+12 - the same fixed NZT sweep.py files raw under
             python3 scripts/segment.py "$(TZ=Etc/GMT-12 date +%F)" --keep-raw
@@ -34,5 +39,5 @@ jobs:
               git commit -m "sweep $(TZ=Etc/GMT-12 date +%H:%M)"
               git pull --rebase && git push || echo "push deferred to next cycle"
             fi
-            if [ "$i" -lt 11 ]; then sleep 300; fi
+            if [ "$i" -lt 66 ]; then sleep 300; fi
           done
